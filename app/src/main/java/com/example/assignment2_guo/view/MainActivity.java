@@ -27,9 +27,6 @@ public class MainActivity extends AppCompatActivity {
         movieAdapter = new MovieAdapter();
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerView.setAdapter(movieAdapter);
-        //enter movie detail page
-        movieAdapter.setOnMovieClickListener(model ->
-                MovieDetailActivity.enter(this, model));
 
         binding.searchButton.setOnClickListener(view -> {
             String query = binding.searchEditText.getText().toString().trim();

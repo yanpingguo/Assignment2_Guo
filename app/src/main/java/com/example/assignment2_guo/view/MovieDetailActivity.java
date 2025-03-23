@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 import com.example.assignment2_guo.R;
@@ -30,65 +31,32 @@ public class MovieDetailActivity extends AppCompatActivity {
     private final String API_KEY = "3b64e9ba";
     ActivityMovieDetailBinding binding;
 
-    static public void enter(Activity activity, MovieModel model) {
-        Intent intent = new Intent(activity, MovieDetailActivity.class);
-        intent.putExtra("Title", model.getTitle());
-        activity.startActivity(intent);
-    }
+    private MovieViewModel viewModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMovieDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        getMovieDetail(getIntent().getStringExtra("Title"),API_KEY);
-        binding.goBackButton.setOnClickListener(view -> finish());
-    }
+        viewModel = new ViewModelProvider(this).get(MovieViewModel.class);
 
+        viewModel.getMovieDetail(getIntent().getStringExtra("Title"), API_KEY);
+        viewModel.getMovieData().observe(this, movie -> {
+            if (movie != null) {
+                binding.movieDetailTitle.setText(movie.getTitle());
+                binding.movieDetailRating.setText(movie.getImdbRating());
+                binding.movieDetailInfo.setText(movie.getYear() + "  " + movie.getRuntime() + "  " + movie.getGenre());
+                binding.movieDetailDescription.setText(movie.getPlot());
 
-    /**
-     * get the movie detail
-     * @param title
-     * @param apiKey
-     */
-    public void getMovieDetail(String title, String apiKey) {
-        String urlString = "https://www.omdbapi.com/?apikey=" + apiKey + "&t=" + title;
-
-        ApiClient.get(urlString, new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                Toast.makeText(MovieDetailActivity.this, "Failed to load movie details", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                if (response.body() == null) return;
-
-                String responseData = response.body().string();
-                try {
-                    JSONObject json = new JSONObject(responseData);
-                    MovieModel movie = MovieViewModel.returnMovieModel(json);
-
-                    runOnUiThread(() -> {
-                        binding.movieDetailTitle.setText(movie.getTitle());
-                        binding.movieDetailRating.setText(movie.getImdbRating());
-                        binding.movieDetailInfo.setText(movie.getYear() + "  " + movie.getRuntime() + "  " + movie.getGenre());
-                        binding.movieDetailDescription.setText(movie.getPlot());
-
-                        // Use Glide to load the poster image
-                        Glide.with(getApplicationContext())
-                                .load(movie.getPoster())
-                                .placeholder(R.mipmap.ic_launcher)
-                                .into(binding.moviePoster);
-                    });
-                } catch (JSONException e) {
-                    runOnUiThread(() -> {
-                        // Handle the error if JSON parsing fails
-                        Toast.makeText(MovieDetailActivity.this, "Failed to parse movie data", Toast.LENGTH_SHORT).show();
-                    });
-                }
+                // Use Glide to load the poster image
+                Glide.with(getApplicationContext())
+                        .load(movie.getPoster())
+                        .placeholder(R.mipmap.ic_launcher)
+                        .into(binding.moviePoster);
+            } else {
+                Toast.makeText(this, "Failed to load movie details", Toast.LENGTH_SHORT).show();
             }
         });
+        binding.goBackButton.setOnClickListener(view -> finish());
     }
-
 }

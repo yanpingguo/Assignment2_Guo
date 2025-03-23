@@ -23,10 +23,20 @@ import okhttp3.Response;
 
 public class MovieViewModel extends ViewModel {
     private final MutableLiveData<List<MovieModel>> movieDataList = new MutableLiveData<>();
+    private final MutableLiveData<MovieModel> movieDetailData = new MutableLiveData<>();
     public LiveData<List<MovieModel>> getMovieDataList() {
         return movieDataList;
     }
 
+    public LiveData<MovieModel> getMovieData() {
+        return movieDetailData;
+    }
+
+    /**
+     * button search
+     * @param query
+     * @param apiKey
+     */
     public void searchMovies(String query, String apiKey) {
         String urlString = "https://www.omdbapi.com/?apikey=" + apiKey + "&s=" + query;
 
@@ -55,6 +65,40 @@ public class MovieViewModel extends ViewModel {
                     movieDataList.postValue(movieList);
                 } catch (JSONException e) {
                     movieDataList.postValue(null);
+                }
+            }
+        });
+    }
+
+
+    /**
+     * get the movie detail
+     * @param title
+     * @param apiKey
+     */
+    public void getMovieDetail(String title, String apiKey) {
+        String urlString = "https://www.omdbapi.com/?apikey=" + apiKey + "&t=" + title;
+
+        ApiClient.get(urlString, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                movieDetailData.postValue(null);
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.body() == null) {
+                    movieDetailData.postValue(null);
+                    return;
+                }
+
+                String responseData = response.body().string();
+                try {
+                    JSONObject json = new JSONObject(responseData);
+                    MovieModel movie = MovieViewModel.returnMovieModel(json);
+                    movieDetailData.postValue(movie);
+                } catch (JSONException e) {
+                    movieDetailData.postValue(null);
                 }
             }
         });
