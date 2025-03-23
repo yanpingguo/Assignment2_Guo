@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#121212"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Movie Poster -->
+    <ImageView
+        android:id="@+id/movie_poster"
+        android:layout_width="240dp"
+        android:layout_height="320dp" />
+    <!-- Movie Title -->
+    <TextView
+        android:id="@+id/movie_detail_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Pirates of the Caribbean: The Curse of the Black Pearl"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <!-- Movie Information -->
+    <TextView
+        android:id="@+id/movie_detail_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2003 143 min Action, Adventure, Fantasy"
+        android:textColor="#CCCCCC" />
+
+    <!-- Movie Rating -->
+    <TextView
+        android:id="@+id/movie_detail_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="8.1"
+        android:textColor="#FFD700" />
+
+    <!-- Movie Description -->
+    <TextView
+        android:id="@+id/movie_detail_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Blacksmith Will Turner teams up with eccentric pirate 'Captain' Jack Sparrow to save Elizabeth Swann, the governor's daughter and his love, from Jack's former pirate allies, who are now undead."
+        android:textColor="#CCCCCC" />
+
+    <!-- Go Back Button -->
+    <Button
+        android:id="@+id/go_back_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#6200EE"
+        android:text="Go Back"
+        android:textColor="#FFFFFF" />
+
+</LinearLayout>
