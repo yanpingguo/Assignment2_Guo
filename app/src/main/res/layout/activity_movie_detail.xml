@@ -18,8 +18,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Pirates of the Caribbean: The Curse of the Black Pearl"
         android:textColor="#FFFFFF"
+        android:text="Anna"
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -28,7 +28,7 @@
         android:id="@+id/movie_detail_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="2003 143 min Action, Adventure, Fantasy"
+        android:text="2019 143 min Action, Adventure, Fantasy"
         android:textColor="#CCCCCC" />
 
     <!-- Movie Rating -->
@@ -36,7 +36,7 @@
         android:id="@+id/movie_detail_rating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="8.1"
+        android:text="7.1"
         android:textColor="#FFD700" />
 
     <!-- Movie Description -->
@@ -45,7 +45,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Blacksmith Will Turner teams up with eccentric pirate 'Captain' Jack Sparrow to save Elizabeth Swann, the governor's daughter and his love, from Jack's former pirate allies, who are now undead."
         android:textColor="#CCCCCC" />
 
     <!-- Go Back Button -->

@@ -23,7 +23,7 @@
         android:layout_below="@id/titleText"
         android:layout_margin="16dp"
         android:background="@android:color/white"
-        android:hint="Enter Movie Title..."
+        android:hint="Enter Movie Title"
         android:padding="10dp"
         android:textColor="@android:color/black" />
 

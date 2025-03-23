@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Pirates of the Caribbean: The Curse of the Black Pearl"
+            android:text="Anna"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -30,14 +30,14 @@
             android:id="@+id/movie_year"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2003 143 min Action, Adventure, Fantasy"
+            android:text="2019 159 min Action, Adventure, Fantasy"
             android:textColor="#CCCCCC" />
 
         <TextView
             android:id="@+id/movie_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="8.1"
+            android:text="7.1"
             android:textColor="#FFD700" />
     </LinearLayout>
 </RelativeLayout>

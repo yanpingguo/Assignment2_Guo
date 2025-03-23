@@ -35,18 +35,18 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MovieViewHolder movieHolder, int position) {
         MovieModel movie = movieList.get(position);
-        holder.title.setText(movie.getTitle());
-        holder.year.setText(movie.getYear() );
-        holder.type.setText(movie.getType() );
+        movieHolder.title.setText(movie.getTitle());
+        movieHolder.year.setText(movie.getYear() );
+        movieHolder.type.setText(movie.getType() );
 
-        Glide.with(holder.itemView.getContext())
+        Glide.with(movieHolder.itemView.getContext())
                 .load(movie.getPoster())
                 .placeholder(R.mipmap.ic_launcher)  // Placeholder image for loading
-                .into(holder.poster);
+                .into(movieHolder.poster);
 
-        holder.itemView.setOnClickListener(view -> {
+        movieHolder.itemView.setOnClickListener(view -> {
             if (onMovieClickListener != null) {
 
                 onMovieClickListener.onGoBackClicked(movie);
